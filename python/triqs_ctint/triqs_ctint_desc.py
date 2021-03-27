@@ -1,30 +1,30 @@
 # Generated automatically using the command :
-# c++2py ../../c++/ctint_tutorial/solver.hpp -p --members_read_only -N ctint_tutorial -a ctint_tutorial -m ctint_tutorial_module -o ctint_tutorial_module --moduledoc="The ctint_tutorial python module" -C pytriqs --cxxflags="-std=c++17" --target_file_only
+# c++2py ../../c++/triqs_ctint/solver.hpp -p --members_read_only -N triqs_ctint -a triqs_ctint -m triqs_ctint -o triqs_ctint --moduledoc="The triqs_ctint python module" -C triqs --cxxflags="-std=c++17" --target_file_only
 from cpp2py.wrap_generator import *
 
 # The module
-module = module_(full_name = "ctint_tutorial_module", doc = r"The ctint_tutorial python module", app_name = "ctint_tutorial")
+module = module_(full_name = "triqs_ctint", doc = r"The triqs_ctint python module", app_name = "triqs_ctint")
 
 # Imports
-module.add_imports(*['pytriqs.gf'])
+module.add_imports(*['triqs.gf'])
 
 # Add here all includes
-module.add_include("ctint_tutorial/solver.hpp")
+module.add_include("triqs_ctint/solver.hpp")
 
 # Add here anything to add in the C++ code at the start, e.g. namespace using
 module.add_preamble("""
 #include <cpp2py/converters/string.hpp>
 #include <triqs/cpp2py_converters/gf.hpp>
 
-using namespace ctint_tutorial;
+using namespace triqs_ctint;
 """)
 
-module.add_enum("spin", ['spin::up', 'spin::down'], "ctint_tutorial", doc = r"""""")
+module.add_enum("spin", ['spin::up', 'spin::down'], "triqs_ctint", doc = r"""""")
 
 # The class solver
 c = class_(
         py_type = "Solver",  # name of the python class
-        c_type = "ctint_tutorial::solver",   # name of the C++ class
+        c_type = "triqs_ctint::solver",   # name of the C++ class
         doc = r"""""",   # doc of the C++ class
         hdf5 = False,
 )

@@ -1,10 +1,10 @@
-from pytriqs.gf import *
-from pytriqs.archive import *
+from triqs.gf import *
+from h5 import *
 from numpy import zeros
-import pytriqs.utility.mpi as mpi
-from pytriqs.utility.h5diff import h5diff
+import triqs.utility.mpi as mpi
+from triqs.utility.h5diff import h5diff
 
-from ctint_tutorial import Solver
+from triqs_ctint import Solver
 
 # Parameters
 beta = 20.0
@@ -27,5 +27,4 @@ if mpi.is_master_node():
   A['G'] = S.G_iw['up']
 
 # -------- Compare ---------
-# Not present
-# h5diff("anderson.out.h5", "anderson.ref.h5")
+h5diff("anderson.out.h5", "anderson.ref.h5")

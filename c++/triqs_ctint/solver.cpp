@@ -6,7 +6,7 @@
 
 using namespace triqs::gfs; 
 using namespace triqs::arrays; 
-using namespace ctint_tutorial;
+using namespace triqs_ctint;
 
 // --------------- The QMC configuration ----------------
 
@@ -118,7 +118,7 @@ struct measure_M {
       // A lambda to measure the M-matrix in frequency
       auto lambda = [this, spin, sign](arg_t const &x, arg_t const &y, dcomplex M) {
         auto const &mesh = this->Mw[spin].mesh();
-        auto phase_step  = -1_j * M_PI * (x.tau - y.tau) / beta;
+        auto phase_step  = -1i * M_PI * (x.tau - y.tau) / beta;
         auto coeff       = std::exp((2 * mesh.first_index() + 1) * phase_step);
         auto fact        = std::exp(2 * phase_step);
         for (auto const &om : mesh) {

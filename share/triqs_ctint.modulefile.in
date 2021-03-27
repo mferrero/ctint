@@ -1,13 +1,13 @@
 #%Module1.0
 #
-# To be installed as ${MODULEPATH}/ctint_tutorial/@CTINT_TUTORIAL_VERSION@
+# To be installed as ${MODULEPATH}/triqs_ctint/@TRIQS_CTINT_VERSION@
 
-set     name        ctint_tutorial
-set     version     @CTINT_TUTORIAL_VERSION@
+set     name        triqs_ctint
+set     version     @TRIQS_CTINT_VERSION@
 set     root        @CMAKE_INSTALL_PREFIX@
 set     git_hash    @PROJECT_GIT_HASH@
 
-set     url         "https://github.com/TRIQS/ctint_tutorial"
+set     url         "https://github.com/TRIQS/triqs_ctint"
 set     description "An example application using cpp2py and triqs."
 
 module-whatis   "$description"
@@ -24,16 +24,16 @@ proc ModulesHelp { } {
 # is installed under a different name in your setup.
 prereq triqs/@TRIQS_VERSION@
 
-# Only one version of ctint_tutorial can be loaded at a time
+# Only one version of triqs_ctint can be loaded at a time
 conflict $name
 
-setenv          CTINT_TUTORIAL_ROOT      $root
-setenv          CTINT_TUTORIAL_VERSION   $version
-setenv          CTINT_TUTORIAL_GIT_HASH  $git_hash
+setenv          TRIQS_CTINT_ROOT      $root
+setenv          TRIQS_CTINT_VERSION   $version
+setenv          TRIQS_CTINT_GIT_HASH  $git_hash
 
 prepend-path    PATH                $root/bin
 prepend-path    CPLUS_INCLUDE_PATH  $root/include
 prepend-path    LIBRARY_PATH        $root/lib
 prepend-path    LD_LIBRARY_PATH     $root/lib
 prepend-path    PYTHONPATH          $root/@TRIQS_PYTHON_LIB_DEST_ROOT@
-prepend-path    CMAKE_PREFIX_PATH   $root/lib/cmake/ctint_tutorial
+prepend-path    CMAKE_PREFIX_PATH   $root/lib/cmake/triqs_ctint

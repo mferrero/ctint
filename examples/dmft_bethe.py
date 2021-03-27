@@ -3,7 +3,7 @@ from pytriqs.archive import *
 from pytriqs.plot.mpl_interface import oplot
 import pytriqs.utility.mpi as mpi
 
-from ctint_tutorial import Solver
+from triqs_ctint import Solver
 
 # Parameters
 U = 2.5            # Hubbard interaction

@@ -3,6 +3,6 @@
 Changelog
 =========
 
-This document describes the main changes in CTINT_TUTORIAL.
+This document describes the main changes in TRIQS_CTINT.
 
 .. include:: ChangeLog.md

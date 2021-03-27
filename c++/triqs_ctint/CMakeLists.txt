@@ -1,22 +1,22 @@
 file(GLOB_RECURSE sources *.cpp)
-add_library(ctint_tutorial_c ${sources})
+add_library(triqs_ctint_c ${sources})
 
 # Link against triqs and enable warnings
-target_link_libraries(ctint_tutorial_c PUBLIC triqs PRIVATE project_warnings)
+target_link_libraries(triqs_ctint_c PUBLIC triqs PRIVATE project_warnings)
 
 # Configure compilation
-target_compile_options(ctint_tutorial_c PUBLIC -fPIC)
-target_include_directories(ctint_tutorial_c PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/c++>)
-target_compile_definitions(ctint_tutorial_c PUBLIC
-				CTINT_TUTORIAL_GIT_HASH=${PROJECT_GIT_HASH}
+target_compile_options(triqs_ctint_c PUBLIC -fPIC)
+target_include_directories(triqs_ctint_c PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/c++>)
+target_compile_definitions(triqs_ctint_c PUBLIC
+				TRIQS_CTINT_GIT_HASH=${PROJECT_GIT_HASH}
 				TRIQS_GIT_HASH=${TRIQS_GIT_HASH}
-				$<$<CONFIG:Debug>:CTINT_TUTORIAL_DEBUG>
+				$<$<CONFIG:Debug>:TRIQS_CTINT_DEBUG>
 				$<$<CONFIG:Debug>:TRIQS_DEBUG>
 				$<$<CONFIG:Debug>:TRIQS_ARRAYS_ENFORCE_BOUNDCHECK>
 			  )
 
 # Install library and headers
-install(TARGETS ctint_tutorial_c EXPORT ctint_tutorial-targets DESTINATION lib)
+install(TARGETS triqs_ctint_c EXPORT triqs_ctint-targets DESTINATION lib)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h")
 
 
@@ -32,7 +32,7 @@ if(ANALYZE_SOURCES)
   # Run clang-tidy if found
   if(CLANG_TIDY_EXECUTABLE)
     message(STATUS "clang-tidy found: ${CLANG_TIDY_EXECUTABLE}")
-    set_target_properties(ctint_tutorial_c PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE}")
+    set_target_properties(triqs_ctint_c PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE}")
   else()
     message(STATUS "clang-tidy not found in $PATH. Please consider installing clang-tidy for additional checks!")
   endif()
@@ -41,7 +41,7 @@ if(ANALYZE_SOURCES)
   if(CPPCHECK_EXECUTABLE)
     message(STATUS "cppcheck found: ${CPPCHECK_EXECUTABLE}")
     add_custom_command(
-	TARGET ctint_tutorial_c
+	TARGET triqs_ctint_c
 	COMMAND ${CPPCHECK_EXECUTABLE}
 	  --enable=warning,style,performance,portability
 	  --std=c++17
@@ -64,11 +64,11 @@ option(UBSAN OFF "Compile library and executables with LLVM Undefined Behavior S
 
 if(ASAN)
   find_package(sanitizer REQUIRED "asan")
-  target_link_libraries(ctint_tutorial_c PUBLIC asan)
-  install(TARGETS asan EXPORT ctint_tutorial-targets)
+  target_link_libraries(triqs_ctint_c PUBLIC asan)
+  install(TARGETS asan EXPORT triqs_ctint-targets)
 endif()
 if(UBSAN)
   find_package(sanitizer REQUIRED "ubsan")
-  target_link_libraries(ctint_tutorial_c PUBLIC ubsan)
-  install(TARGETS ubsan EXPORT ctint_tutorial-targets)
+  target_link_libraries(triqs_ctint_c PUBLIC ubsan)
+  install(TARGETS ubsan EXPORT triqs_ctint-targets)
 endif()

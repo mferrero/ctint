@@ -1,20 +1,20 @@
 # ##############################################################################
 #
-# ctint_tutorial - An example application using triqs and cpp2py
+# triqs_ctint - An example application using triqs and cpp2py
 #
 # Copyright (C) ...
 #
-# ctint_tutorial is free software: you can redistribute it and/or modify it under the
+# triqs_ctint is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 3 of the License, or (at your option) any later
 # version.
 #
-# ctint_tutorial is distributed in the hope that it will be useful, but WITHOUT ANY
+# triqs_ctint is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# ctint_tutorial (in the file COPYING.txt in this directory). If not, see
+# triqs_ctint (in the file COPYING.txt in this directory). If not, see
 # <http://www.gnu.org/licenses/>.
 #
 # ##############################################################################
@@ -26,12 +26,11 @@ endif()
 
 # ############
 # Define Project
-project(CTINT_TUTORIAL VERSION 2.2.0 LANGUAGES C CXX)
+project(TRIQS_CTINT VERSION 3.0.0 LANGUAGES C CXX)
 
 # ############
-# Load TRIQS and CPP2PY
-find_package(TRIQS 2.2 REQUIRED)
-find_package(Cpp2Py 1.6 REQUIRED)
+# Load TRIQS
+find_package(TRIQS 3.0 REQUIRED)
 
 # Get the git hash & print status
 triqs_get_git_hash_of_source_dir(PROJECT_GIT_HASH)
@@ -73,7 +72,7 @@ add_compile_options(
 
 # Create an Interface target for compiler warnings
 add_library(project_warnings INTERFACE)
-install(TARGETS project_warnings EXPORT ctint_tutorial-targets)
+install(TARGETS project_warnings EXPORT triqs_ctint-targets)
 target_compile_options(project_warnings
   INTERFACE
     -Wall
@@ -88,8 +87,8 @@ target_compile_options(project_warnings
 # #############
 # Build Project
 
-# Build and install the ctint_tutorial library
-add_subdirectory(c++/ctint_tutorial)
+# Build and install the triqs_ctint library
+add_subdirectory(c++/triqs_ctint)
 
 # Tests
 option(Build_Tests "Build tests" ON)
@@ -100,7 +99,7 @@ endif()
 
 if(TRIQS_WITH_PYTHON_SUPPORT)
   # Python interface
-  add_subdirectory(python/ctint_tutorial)
+  add_subdirectory(python/triqs_ctint)
 
   # Build the documentation
   option(Build_Documentation "Build documentation" OFF)
@@ -127,10 +126,10 @@ if(BUILD_DEBIAN_PACKAGE)
   if(NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr")
     message(FATAL_ERROR "CMAKE_INSTALL_PREFIX must be /usr for packaging")
   endif()
-  set(CPACK_PACKAGE_NAME ctint_tutorial)
+  set(CPACK_PACKAGE_NAME triqs_ctint)
   set(CPACK_GENERATOR "DEB")
   set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
-  set(CPACK_PACKAGE_CONTACT "https://github.com/TRIQS/ctint_tutorial")
+  set(CPACK_PACKAGE_CONTACT "https://github.com/TRIQS/triqs_ctint")
   execute_process(COMMAND dpkg --print-architecture OUTPUT_VARIABLE CMAKE_DEBIAN_PACKAGE_ARCHITECTURE OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "triqs (>= 2.2)")
   set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)

@@ -32,10 +32,10 @@ C++ reference manual
 Python reference manual
 -----------------------
 
-.. automodule:: ctint_tutorial 
+.. automodule:: triqs_ctint 
    :members:
 
-.. autoclass:: ctint_tutorial.ctint_tutorial_module.Toto
+.. autoclass:: triqs_ctint.triqs_ctint_module.Toto
    :members:
 
-.. autofunction:: ctint_tutorial.ctint_tutorial_module.chain
+.. autofunction:: triqs_ctint.triqs_ctint_module.chain

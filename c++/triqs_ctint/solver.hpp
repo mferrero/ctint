@@ -2,7 +2,7 @@
 
 // ------------ The main class of the solver -----------------------
 
-namespace ctint_tutorial {
+namespace triqs_ctint {
 
   enum spin { up, down };
 
@@ -31,4 +31,4 @@ namespace ctint_tutorial {
     void solve(double U, double delta, int n_cycles, int length_cycle = 50, int n_warmup_cycles = 5000, std::string random_name = "",
                int max_time = -1);
   };
-} // namespace ctint_tutorial
+} // namespace triqs_ctint

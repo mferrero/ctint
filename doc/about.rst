@@ -1,6 +1,6 @@
 .. _about:
 
-About ctint_tutorial
+About triqs_ctint
 ===============
 
 An example application using ``cpp2py`` and TRIQS.

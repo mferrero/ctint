@@ -25,6 +25,6 @@ r"""
 DOC
 
 """
-from ctint_tutorial_module import Solver
+from .triqs_ctint import Solver
 
 __all__ = ['Solver']

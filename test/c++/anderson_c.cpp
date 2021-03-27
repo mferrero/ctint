@@ -1,10 +1,10 @@
-#include <ctint_tutorial/solver.hpp>
+#include <triqs_ctint/solver.hpp>
 
 #include <triqs/gfs.hpp>
 #include <triqs/test_tools/gfs.hpp>
 
 using namespace triqs::gfs; 
-using namespace ctint_tutorial; 
+using namespace triqs_ctint; 
 
 // Anderson model test
 TEST(CtInt, Anderson) {
@@ -40,12 +40,12 @@ TEST(CtInt, Anderson) {
   std::string filename = "anderson_c";
   gf<imfreq> g;
   if (rank == 0) {
-    triqs::h5::file G_file(filename + ".ref.h5", 'r');
+    h5::file G_file(filename + ".ref.h5", 'r');
     h5_read(G_file, "G", g);
     EXPECT_GF_NEAR(g, ctqmc.G_iw()[0]);
   }
   if (rank == 0) {
-    triqs::h5::file G_file(filename + ".out.h5", 'w');
+    h5::file G_file(filename + ".out.h5", 'w');
     h5_write(G_file, "G", ctqmc.G_iw()[0]);
   }
 }

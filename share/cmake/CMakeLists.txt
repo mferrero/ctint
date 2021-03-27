@@ -1,10 +1,10 @@
-configure_file(ctint_tutorial-config.cmake.in ctint_tutorial-config.cmake @ONLY)
-configure_file(ctint_tutorial-config-version.cmake.in ctint_tutorial-config-version.cmake @ONLY)
+configure_file(triqs_ctint-config.cmake.in triqs_ctint-config.cmake @ONLY)
+configure_file(triqs_ctint-config-version.cmake.in triqs_ctint-config-version.cmake @ONLY)
 install(
   FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/ctint_tutorial-config.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/ctint_tutorial-config-version.cmake
-  DESTINATION lib/cmake/ctint_tutorial
+    ${CMAKE_CURRENT_BINARY_DIR}/triqs_ctint-config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/triqs_ctint-config-version.cmake
+  DESTINATION lib/cmake/triqs_ctint
 )
 
-install(EXPORT ctint_tutorial-targets NAMESPACE ctint_tutorial:: DESTINATION lib/cmake/ctint_tutorial)
+install(EXPORT triqs_ctint-targets NAMESPACE triqs_ctint:: DESTINATION lib/cmake/triqs_ctint)
