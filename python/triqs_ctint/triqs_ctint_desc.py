@@ -14,6 +14,7 @@ module.add_include("triqs_ctint/solver.hpp")
 # Add here anything to add in the C++ code at the start, e.g. namespace using
 module.add_preamble("""
 #include <cpp2py/converters/string.hpp>
+#include <cpp2py/converters/vector.hpp>
 #include <triqs/cpp2py_converters/gf.hpp>
 
 using namespace triqs_ctint;
@@ -28,6 +29,11 @@ c = class_(
         doc = r"""""",   # doc of the C++ class
         hdf5 = False,
 )
+
+c.add_member(c_name = "histogram",
+             c_type = "std::vector<double>",
+             read_only= True,
+             doc = r"""Peturbation histogram""")
 
 c.add_constructor("""(double beta_, int n_iw = 1024, int n_tau = 100001)""", doc = r"""Construct a ctint solver""")
 

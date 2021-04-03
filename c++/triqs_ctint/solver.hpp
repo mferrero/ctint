@@ -24,6 +24,9 @@ namespace triqs_ctint {
     /// Access interacting Matsubara Green function
     block_gf_view<imfreq> G_iw() { return g_iw; }
 
+    /// Peturbation histogram
+    std::vector<double> histogram;
+
     /// Construct a ctint solver
     solver(double beta_, int n_iw = 1024, int n_tau = 100001);
 

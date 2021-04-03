@@ -99,6 +99,30 @@ struct move_remove {
 
 //  -------------- QMC measurement ----------------
 
+struct measure_histogram {
+
+  configuration const *config;   // Pointer to the MC configuration
+  std::vector<double> &hist; // histogram
+  long count = 0;
+
+  measure_histogram(configuration const *config_, std::vector<double> &hist_) : config(config_), hist(hist_) {
+    hist.resize(1000);
+    for (double &h: hist) h = 0;
+  }
+
+  void accumulate(dcomplex sign) {
+    hist[config->perturbation_order()] += 1;
+    count++;
+  }
+
+  void collect_results(mpi::communicator const &c) {
+    hist= mpi::all_reduce(hist, c);
+    count = mpi::all_reduce(count, c);
+    for (double &h: hist) h /= count;
+  }
+
+};
+
 struct measure_M {
 
   configuration const *config; // Pointer to the MC configuration
@@ -179,6 +203,7 @@ void solver::solve(double U, double delta, int n_cycles, int length_cycle, int n
   CTQMC.add_move(move_insert{&config, CTQMC.get_rng(), beta, U}, "insertion");
   CTQMC.add_move(move_remove{&config, CTQMC.get_rng(), beta, U}, "removal");
   CTQMC.add_measure(measure_M{&config, M_iw, beta}, "M measurement");
+  CTQMC.add_measure(measure_histogram{&config, histogram}, "histogram measurement");
 
   // Run and collect results
   CTQMC.warmup_and_accumulate(n_warmup_cycles, n_cycles, length_cycle, triqs::utility::clock_callback(max_time));
